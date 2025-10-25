@@ -1,4 +1,4 @@
-<template x-if="tipoPregunta==='opcion_multiple'">
+<template x-if="typeQuestion==='opcion_multiple'">
     <div x-data="{
         question: '¿Cómo calificaría la amabilidad del personal que le atendió?',
         options: [{ value: 'Opción 1' }, { value: 'Opción 2' }, { value: 'Opción 3' }, { value: 'Opción 4' }],

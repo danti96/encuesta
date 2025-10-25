@@ -53,19 +53,30 @@
         };
         const componentSurveys = () => {
             return {
-                items: [],
-                tipoPregunta: 'matriz_preguntas',
+                questions: [],
+                typeQuestion: 'matriz_preguntas',
                 createQuestion: true,
                 createComponent() {
-                    if (this.tipoPregunta == '') {
+                    if (this.typeQuestion == '') {
                         alert('Seleccione tipo de pregunta');
                         return;
                     }
                     this.createQuestion = !this.createQuestion;
                 },
                 addItem(detail) {
-                    this.items.push(detail);
+                    this.questions.push(detail);
                     this.createQuestion = true;
+                },
+                removeQuestion(index) {
+                    this.questions.splice(index, 1);
+                },
+                removeOption(index, indexOption) {
+                    this.questions[index].options.splice(indexOption, 1);
+                },
+                addOption(index) {
+                    this.questions[index].options.push({
+                        value: ''
+                    });
                 }
             }
         }
@@ -133,7 +144,7 @@
                                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                         Seleccione el tipo de pregunta
                                     </label>
-                                    <select id="tipo_pregunta" x-model="tipoPregunta" required
+                                    <select id="tipo_pregunta" x-model="typeQuestion" required
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                         <option value="">Seleccione</option>
                                         <option value="opcion_multiple" selected>Opción multiple</option>
@@ -181,6 +192,19 @@
                     </div>
                 </template>
             </div>
+
+            <template x-for="(rows, index) in questions">
+                <div
+                    class="bg-white dark:bg-gray-800 shadow-md border dark:border-gray-800 rounded-md space-y-4 max-w-3xl mx-auto p-4">
+                    <x-survey.view.opcion-multiple />
+                    <x-survey.view.escala-clasificacion />
+                    <x-survey.view.escala-likert />
+                    <x-survey.view.pregunta-abierta />
+                    <x-survey.view.matriz-preguntas />
+                    <x-survey.view.separador />
+                </div>
+            </template>
+            <pre x-text="JSON.stringify(questions, null, 2)"></pre>
         </div>
         <div x-show="currentStep === 2">
             <div class="flex w-full px-4 py-3 gap-4 overflow-auto">

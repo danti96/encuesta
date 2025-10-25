@@ -1,4 +1,4 @@
-<template x-if="tipoPregunta==='escala_clasificacion'">
+<template x-if="typeQuestion==='escala_clasificacion'">
     <div x-data="{
         question: '¿Cómo calificaría la amabilidad del personal que le atendió?',
         numScal: 0,

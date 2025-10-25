@@ -1,14 +1,15 @@
-<template x-if="tipoPregunta==='pregunta_abierta'">
+<template x-if="typeQuestion==='pregunta_abierta'">
     <div x-data="{
         question: '¿Hay algún comentario adicional que desee compartir?',
+        options: [],
         pushQuestion() {
-            if (this.options.length == 0) {
+            if (this.question.length == 0) {
                 alert('No se puede agregar una pregunta vacía.');
                 return;
             }
-            $dispatch('add-question', { type: 'pregunta_abierta', question: this.question });
+            $dispatch('add-question', { type: 'pregunta_abierta', question: this.question, options: this.options });
+            this.reset();
             createQuestion = !createQuestion;
-            this.question = '';
         },
         reset() {
             this.question = '';
