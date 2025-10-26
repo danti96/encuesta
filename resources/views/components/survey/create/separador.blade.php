@@ -1,6 +1,6 @@
 <template x-if="typeQuestion==='separar_pregunta'">
     <div x-data="{
-        question: '',
+        question: 'Preguntas de calidad',
         pushQuestion() {
             if (this.question.trim() === '') {
                 alert('Texto de separación no puede estar vacío.');
@@ -25,7 +25,7 @@
         </div>
 
         <div class="flex justify-center gap-4">
-            <button type="button" @click="pushQuestion();"
+            <button type="button" @click="pushQuestion();" id="section-question-agg"
                 class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 gap-1">
                 <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 48 48" stroke-width="3">
                     <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">

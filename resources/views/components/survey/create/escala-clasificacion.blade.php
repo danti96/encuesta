@@ -1,8 +1,8 @@
 <template x-if="typeQuestion==='escala_clasificacion'">
     <div x-data="{
         question: '¿Cómo calificaría la amabilidad del personal que le atendió?',
-        numScal: 0,
-        options: [],
+        numScal: 11,
+        options: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
         selected: null,
         colorScale: ['bg-red-400', 'bg-orange-400', 'bg-yellow-400', 'bg-lime-400', 'bg-green-500', 'bg-green-600'],
         generateList() {
@@ -48,6 +48,7 @@
                     Ingrese el número de la escala
                 </label>
                 <input type="number" min="0" max="11" x-model.number="numScal" @input="generateList"
+                    id="numscal-input-tag"
                     class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
             </div>
             <div class="w-full mx-auto flex justify-center flex-wrap gap-3">
@@ -63,7 +64,7 @@
         </div>
 
         <div class="flex justify-between sm:justify-center w-full px-4 py-3 sm:gap-4">
-            <button type="button" @click="pushQuestion();"
+            <button type="button" @click="pushQuestion();" id="section-question-agg"
                 class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 gap-1">
                 <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 48 48" stroke-width="3">
                     <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">

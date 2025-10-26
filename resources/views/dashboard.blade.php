@@ -5,7 +5,7 @@
                 currentStep: 0,
                 steps: 3,
                 form: {
-                    nombre: '🧾 ENCUESTA DE CALIDAD DE SERVICIO',
+                    nombre: '',
                     descripcion: '',
                     register: {
                         fields: []
@@ -224,23 +224,23 @@
             <form @submit.prevent="formValidate()" class="space-y-4">
                 <div class="p-4 text-sm px-3 font-semibold py-1 rounded-lg space-y-2">
                     <div class="flex flex-col gap-2">
-                        <label for="Nombre"
+                        <label for="nombre"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre:</label>
-                        <input type="text" x-model="form.nombre" required
+                        <input type="text" x-model="form.nombre" required id="nombre" name="nombre"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     </div>
 
                     <div class="flex flex-col gap-2">
-                        <label for="Nombre"
+                        <label for="descripcion"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Descripción:</label>
-                        <textarea x-model="form.descripcion"
+                        <textarea x-model="form.descripcion" id="descripcion" name="descripcion"
                             class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             rows="3"></textarea>
                     </div>
                 </div>
                 {{-- Opciones  --}}
                 <div class="flex justify-end w-full px-4 py-3 gap-4">
-                    <button type="submit"
+                    <button type="submit" id="siguiente"
                         class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                         Siguiente
                         <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true"
@@ -266,7 +266,8 @@
                         <div class="grid grid-cols-2 gap-4">
                             <div>
                                 <label class="block text-sm font-medium">Tipo</label>
-                                <select x-model="newField.type" class="mt-1 block w-full rounded border p-2">
+                                <select x-model="newField.type" class="mt-1 block w-full rounded border p-2"
+                                    id="section-form-tipo" name="section-form-tipo">
                                     <option value="text">Texto</option>
                                     <option value="date">Fecha</option>
                                     <option value="number">Número</option>
@@ -277,14 +278,16 @@
 
                             <div>
                                 <label class="block text-sm font-medium">Label</label>
-                                <input x-model="newField.label" type="text"
-                                    class="mt-1 block w-full rounded border p-2" placeholder="Ej: Nombre">
+                                <input x-model="newField.label" type="text" id="section-form-label"
+                                    name="section-form-label" class="mt-1 block w-full rounded border p-2"
+                                    placeholder="Ej: Nombre">
                             </div>
 
                             <div>
                                 <label class="block text-sm font-medium">Name (clave)</label>
-                                <input x-model="newField.name" type="text"
-                                    class="mt-1 block w-full rounded border p-2" placeholder="clave_unica">
+                                <input x-model="newField.name" type="text" id="section-form-name"
+                                    name="section-form-name" class="mt-1 block w-full rounded border p-2"
+                                    placeholder="clave_unica">
                             </div>
 
                             <div>
@@ -327,7 +330,7 @@
                     </template>
                     {{-- Opciones  --}}
                     <div class="flex justify-between sm:justify-center w-full px-4 py-3 sm:gap-4">
-                        <button type="button" @click="addFieldFromNew()"
+                        <button type="button" @click="addFieldFromNew()" id="section-form-btn-agregar"
                             class=" bg-blue-700  hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 text-white font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center sm:me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                 stroke-width="1.5" stroke="currentColor" class="size-6">
@@ -345,7 +348,7 @@
                             </svg>
                             Volver
                         </button>
-                        <button type="button" @click="finish($dispatch);currentStep++;"
+                        <button type="button" @click="finish($dispatch);currentStep++;" id="section-form-btn-crear"
                             class=" bg-blue-700  hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 text-white font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center sm:me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                 stroke-width="1.5" stroke="currentColor" class="size-6">
@@ -437,7 +440,7 @@
                                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                         Seleccione el tipo de pregunta
                                     </label>
-                                    <select id="tipo_pregunta" x-model="typeQuestion" required
+                                    <select x-model="typeQuestion" required id="tipo_pregunta" name="tipo_pregunta"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                         <option value="">Seleccione</option>
                                         <option value="opcion_multiple" selected>Opción multiple</option>
@@ -461,7 +464,7 @@
                                 </svg>
                                 Volver
                             </button>
-                            <button type="submit"
+                            <button type="submit" id="section-survery-btn"
                                 class=" bg-blue-700  hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 text-white font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center sm:me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                     stroke-width="1.5" stroke="currentColor" class="size-6">
@@ -470,7 +473,7 @@
                                 </svg>
                                 Crear Pregunta
                             </button>
-                            <button type="button" @click="finish($dispatch);currentStep++"
+                            <button type="button" @click="finish($dispatch);currentStep++" id="section-survery-fin"
                                 class=" bg-blue-700  hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 text-white font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center sm:me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                     stroke-width="1.5" stroke="currentColor" class="size-6">
@@ -616,12 +619,12 @@
             <template x-for="(rows, index) in form.surveys">
                 <div
                     class="mt-4 bg-white dark:bg-gray-800 shadow-md border dark:border-gray-800 rounded-md space-y-4 max-w-3xl mx-auto p-4">
-                    <x-survey.view.opcion-multiple />
-                    <x-survey.view.escala-clasificacion />
-                    <x-survey.view.escala-likert />
-                    <x-survey.view.pregunta-abierta />
-                    <x-survey.view.matriz-preguntas />
-                    <x-survey.view.separador />
+                    <x-survey.check.opcion-multiple />
+                    <x-survey.check.escala-clasificacion />
+                    <x-survey.check.escala-likert />
+                    <x-survey.check.pregunta-abierta />
+                    <x-survey.check.matriz-preguntas />
+                    <x-survey.check.separador />
                 </div>
             </template>
         </div>
