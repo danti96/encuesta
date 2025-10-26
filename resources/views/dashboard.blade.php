@@ -20,18 +20,19 @@
                     this.currentStep++;
                 },
                 addItem(detail) {
-                    console.log(detail);
                     if (detail.type === 'register') {
                         this.form.register = detail.register;
                     } else if (detail.type === 'surveys') {
                         this.form.surveys = detail.surveys;
                     }
+                    ToastNotification('Campos Agregado', 'Encuesta', 'info');
                 },
                 buttonDisabled: false,
                 store() {
-                    if (this.form.survey.length == 0) {
-                        Toast.warning(
-                            'La encuesta no puede tener preguntas vacías, asegurese de agregar una pregunta.');
+                    if (this.form.surveys.length == 0) {
+                        ToastNotification(
+                            'La encuesta no puede tener preguntas vacías, asegurese de agregar una pregunta.',
+                            'Encuesta', 'warning');
                         return;
                     }
 
@@ -43,7 +44,7 @@
 
                     const success = (e) => {
                         const message = (e?.data?.message) ? e?.data?.message : 'Encuesta creada correctamente.';
-                        Toast.success(message);
+                        ToastNotification(message, 'Encuesta', 'success');
                         this.buttonDisabled = false;
                     }
 
@@ -51,7 +52,7 @@
                         const message = (e?.response?.data?.message) ? e?.response?.data?.message :
                             'Error al crear encuesta, revise los datos ingresados o recarge la página.';
                         console.error(message);
-                        Toast.warning(message);
+                        ToastNotification(message, 'Encuesta', 'warning');
                         this.buttonDisabled = false;
                     }
 
@@ -180,6 +181,7 @@
                 addItem(detail) {
                     this.questions.push(detail);
                     this.createQuestion = true;
+                    ToastNotification('Pregunta agregada', 'Encuesta', 'success');
                 },
 
                 removeQuestion(index) {
@@ -518,7 +520,7 @@
                     </svg>
                     Volver
                 </button>
-                <button type="button" @click="finish($dispatch);"
+                <button type="button" @click="store();"
                     class=" bg-blue-700  hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 text-white font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center sm:me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                     <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 48 48" stroke-width="3">
                         <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
@@ -570,7 +572,8 @@
                                 <div class="mt-2">
                                     <!-- text / number -->
                                     <template x-if="f.type === 'text' || f.type === 'number' || f.type === 'date'">
-                                        <input :type="f.type" :name="f.name" x-model="form[f.name]"
+                                        <input :type="f.type" :name="f.name"
+                                            x-model="form.register.form[f.name]"
                                             class="w-full md:w-2/3 rounded border p-2" :placeholder="f.label">
                                     </template>
 
@@ -580,7 +583,7 @@
                                             <template x-for="(opt, i) in f.options" :key="i">
                                                 <label class="inline-flex items-center gap-2">
                                                     <input type="radio" :name="f.name"
-                                                        :value="opt" x-model="form[f.name]">
+                                                        :value="opt" x-model="form.register.form[f.name]">
                                                     <span x-text="opt"></span>
                                                 </label>
                                             </template>
@@ -589,7 +592,7 @@
 
                                     <!-- select -->
                                     <template x-if="f.type === 'select'">
-                                        <select :name="f.name" x-model="form[f.name]"
+                                        <select :name="f.name" x-model="form.register.form[f.name]"
                                             class="rounded border p-2 w-full md:w-2/3">
                                             <option value="">— Seleccionar —</option>
                                             <template x-for="(opt, i) in f.options" :key="i">

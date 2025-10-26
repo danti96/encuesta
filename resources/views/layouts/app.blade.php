@@ -38,7 +38,7 @@
         </main>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
-
+    <x-toast />
     <!-- Script para alternar tema -->
     <script>
         const themeToggleBtn = document.getElementById('theme-toggle');
@@ -59,7 +59,6 @@
         }
 
         themeToggleBtn.addEventListener('click', function() {
-            console.log('clickeado');
             darkIcon.classList.toggle('hidden');
             lightIcon.classList.toggle('hidden');
 
@@ -81,6 +80,19 @@
                 }
             }
         });
+    </script>
+    <script>
+        const ToastNotification = (description = '', title = '', type = 'default', position = 'top-center', html = '') => {
+            window.dispatchEvent(new CustomEvent('toast-show', {
+                detail: {
+                    type: type,
+                    message: title,
+                    description: description,
+                    position: position,
+                    html: ''
+                }
+            }));
+        }
     </script>
 
 </body>
